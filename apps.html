@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ArcadeVault - Apps</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <nav class="sidebar" aria-label="Site navigation">
+    <div class="brand">
+      <h1>Arcade<span>Vault</span></h1>
+      <p>Games • Apps • Chat</p>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="section-label">Games</div>
+      <a class="nav-link" data-page="index" href="index.html"><span class="icon">🏠</span> Dashboard</a>
+      <a class="nav-link" data-page="games" href="games.html"><span class="icon">🎮</span> All Games <span class="count">18</span></a>
+      <a class="nav-link" data-page="games" href="games.html?filter=featured"><span class="icon">⭐</span> Featured</a>
+      <a class="nav-link" data-page="games" href="games.html?filter=new"><span class="icon">✨</span> New</a>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="section-label">Apps</div>
+      <a class="nav-link active" data-page="apps" href="apps.html"><span class="icon">🧰</span> Apps Home</a>
+      <a class="nav-link" data-page="apps" href="apps.html#notes"><span class="icon">📝</span> Notes</a>
+      <a class="nav-link" data-page="apps" href="apps.html#calculator"><span class="icon">🧮</span> Calculator</a>
+      <a class="nav-link" data-page="apps" href="apps.html#timer"><span class="icon">⏱️</span> Timer</a>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="section-label">Chat</div>
+      <a class="nav-link" data-page="chat" href="chat.html"><span class="icon">💬</span> Chat Home</a>
+      <a class="nav-link" data-page="chat" href="chat.html#friends"><span class="icon">👥</span> Friends</a>
+      <a class="nav-link" data-page="chat" href="chat.html#messages"><span class="icon">📨</span> Messages</a>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="section-label">Settings</div>
+      <a class="nav-link" data-page="settings" href="settings.html"><span class="icon">⚙️</span> Settings</a>
+      <a class="nav-link" data-page="settings" href="settings.html#theme"><span class="icon">🎨</span> Theme</a>
+      <a class="nav-link" data-page="settings" href="settings.html#sound"><span class="icon">🔊</span> Sound</a>
+      <a class="nav-link" data-page="settings" href="settings.html#account"><span class="icon">👤</span> Account</a>
+    </div>
+
+    <div class="sidebar-footer">ArcadeVault &copy; 2025</div>
+  </nav>
+
+  <main class="main">
+    <div class="topbar">
+      <div class="page-title">Apps</div>
+    </div>
+
+    <div class="content">
+      <div class="section" id="notes">
+        <div class="section-head"><h2>Notes</h2></div>
+        <div class="setting-card">
+          <h3>Quick Notes</h3>
+          <p>Use this area for reminders, to-dos, or little ideas. You can expand it later into a real notes app.</p>
+        </div>
+      </div>
+
+      <div class="section" id="calculator">
+        <div class="section-head"><h2>Calculator</h2></div>
+        <div class="setting-card">
+          <h3>Mini Tools</h3>
+          <p>This section can hold small tools like a calculator, converter, or random picker.</p>
+        </div>
+      </div>
+
+      <div class="section" id="timer">
+        <div class="section-head"><h2>Timer</h2></div>
+        <div class="setting-card">
+          <h3>Timers and Focus</h3>
+          <p>Add a stopwatch, countdown timer, or study timer here when you're ready.</p>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
