@@ -18,27 +18,24 @@
       <div class="section-label">Games</div>
       <a class="nav-link" data-page="index" href="index.html"><span class="icon">🏠</span> Dashboard</a>
       <a class="nav-link" data-page="games" href="games.html"><span class="icon">🎮</span> All Games <span class="count">18</span></a>
-      <a class="nav-link" data-page="games" href="games.html?filter=featured"><span class="icon">⭐</span> Featured</a>
     </div>
 
     <div class="sidebar-section">
       <div class="section-label">Apps</div>
       <a class="nav-link" data-page="apps" href="apps.html"><span class="icon">🧰</span> Apps Home</a>
-      <a class="nav-link" data-page="apps" href="apps.html#notes"><span class="icon">📝</span> Notes</a>
     </div>
 
     <div class="sidebar-section">
       <div class="section-label">Chat</div>
       <a class="nav-link" data-page="chat" href="chat.html"><span class="icon">💬</span> Chat Home</a>
-      <a class="nav-link" data-page="chat" href="chat.html#messages"><span class="icon">📨</span> Messages</a>
     </div>
 
     <div class="sidebar-section">
       <div class="section-label">Settings</div>
       <a class="nav-link active" data-page="settings" href="settings.html"><span class="icon">⚙️</span> Settings</a>
-      <a class="nav-link" data-page="settings" href="settings.html#theme"><span class="icon">🎨</span> Theme</a>
-      <a class="nav-link" data-page="settings" href="settings.html#sound"><span class="icon">🔊</span> Sound</a>
-      <a class="nav-link" data-page="settings" href="settings.html#account"><span class="icon">👤</span> Account</a>
+      <a class="nav-link" href="#theme"><span class="icon">🎨</span> Theme</a>
+      <a class="nav-link" href="#sound"><span class="icon">🔊</span> Sound</a>
+      <a class="nav-link" href="#account"><span class="icon">👤</span> Account</a>
     </div>
 
     <div class="sidebar-footer">ArcadeVault &copy; 2025</div>
@@ -53,17 +50,41 @@
       <div class="settings-grid">
         <div class="setting-card" id="theme">
           <h3>Theme</h3>
-          <p>Choose a dark or light look later, or add custom accent colors.</p>
+          <div class="field">
+            <label for="themeSelect">Color mode</label>
+            <select id="themeSelect">
+              <option value="dark">Dark</option>
+              <option value="light">Light</option>
+            </select>
+          </div>
+          <div class="field" style="margin-top:12px;">
+            <label for="accentColor">Accent color</label>
+            <input id="accentColor" type="color" />
+          </div>
         </div>
 
         <div class="setting-card" id="sound">
           <h3>Sound</h3>
-          <p>Control menu sounds, game volume, and notification audio.</p>
+          <p id="soundLabel">Sound is on</p>
+          <div class="field" style="margin-top:12px;">
+            <label>
+              <input id="soundToggle" type="checkbox" />
+              Enable sound
+            </label>
+          </div>
         </div>
 
         <div class="setting-card" id="account">
           <h3>Account</h3>
-          <p>Add login, profile, saved games, and favorites when you want to expand it.</p>
+          <p>Profile name: <strong id="accountName">Guest</strong></p>
+          <div class="field" style="margin-top:12px;">
+            <label for="usernameInput">Username</label>
+            <input id="usernameInput" type="text" placeholder="Your name" />
+          </div>
+          <div class="field" style="margin-top:12px;">
+            <label for="statusInput">Status</label>
+            <input id="statusInput" type="text" placeholder="Busy, online, away..." />
+          </div>
         </div>
       </div>
     </div>
