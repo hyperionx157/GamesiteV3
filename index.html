@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ArcadeVault — Play Free Games</title>
+  <link rel="stylesheet" href="index.css" />
+  <script src="index.js" defer></script>
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="logo">
+      <div class="logo-text">Arcade<span>Vault</span></div>
+      <div class="logo-sub">Free Games</div>
+    </div>
+
+    <div class="search-wrap">
+      <input type="text" id="searchInput" placeholder="🔍  Search games..." oninput="filterGames()" />
+    </div>
+
+    <div class="nav-label">Browse</div>
+    <div class="nav-item active" onclick="setCategory('all', this)">
+      <span class="icon">🎮</span> All Games <span class="count" id="countAll">18</span>
+    </div>
+    <div class="nav-item" onclick="setCategory('action', this)">
+      <span class="icon">⚔️</span> Action <span class="count">5</span>
+    </div>
+    <div class="nav-item" onclick="setCategory('puzzle', this)">
+      <span class="icon">🧩</span> Puzzle <span class="count">4</span>
+    </div>
+    <div class="nav-item" onclick="setCategory('sports', this)">
+      <span class="icon">⚽</span> Sports <span class="count">3</span>
+    </div>
+    <div class="nav-item" onclick="setCategory('racing', this)">
+      <span class="icon">🏎️</span> Racing <span class="count">3</span>
+    </div>
+    <div class="nav-item" onclick="setCategory('casual', this)">
+      <span class="icon">🎯</span> Casual <span class="count">3</span>
+    </div>
+
+    <div class="nav-label" style="margin-top:8px">Quick Play</div>
+    <div class="nav-item" onclick="setFilter('new', this)">
+      <span class="icon">✨</span> New
+    </div>
+    <div class="nav-item" onclick="setFilter('hot', this)">
+      <span class="icon">🔥</span> Popular
+    </div>
+
+    <div class="sidebar-footer">ArcadeVault &copy; 2025</div>
+  </aside>
+
+  <div class="main" id="mainArea">
+    <div class="topbar">
+      <h1 id="pageTitle">All Games</h1>
+      <div class="tag-filters">
+        <div class="tag active" onclick="setTag('all', this)">All</div>
+        <div class="tag" onclick="setTag('new', this)">New</div>
+        <div class="tag" onclick="setTag('hot', this)">Hot</div>
+        <div class="tag" onclick="setTag('top', this)">Top Rated</div>
+      </div>
+    </div>
+
+    <div class="content" id="gameContent">
+      <div class="section-title">Featured</div>
+      <div class="grid" id="featuredGrid"></div>
+
+      <div class="section-title">All Games</div>
+      <div class="grid" id="allGrid"></div>
+    </div>
+
+    <div class="player" id="player">
+      <div class="player-bar">
+        <button class="btn-back" onclick="closeGame()">← Back</button>
+        <div class="player-title" id="playerTitle">Game</div>
+        <button class="btn-fullscreen" onclick="goFullscreen()">⛶ Fullscreen</button>
+      </div>
+      <iframe
+        id="gameFrame"
+        src=""
+        allowfullscreen
+        sandbox="allow-scripts allow-same-origin allow-popups allow-forms"></iframe>
+    </div>
+  </div>
+</body>
+</html>
