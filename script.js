@@ -20,29 +20,51 @@ const GAMES = [
   { id: 18, name: "Sudoku", genre: "puzzle", emoji: "#️⃣", bg: "#101010", badge: "top", url: "https://sudoku.com/", featured: false }
 ];
 
+const pages = {
+  index: "Dashboard",
+  games: "Games",
+  apps: "Apps",
+  chat: "Chat",
+  settings: "Settings"
+};
+
 let currentCategory = "all";
 let currentTag = "all";
 let searchQuery = "";
 
-function makeCard(g) {
-  const badgeMap = { hot: "badge-hot", new: "badge-new", top: "badge-top" };
-  const badgeLabel = { hot: "🔥 Hot", new: "✨ New", top: "⭐ Top" };
+function pageKey() {
+  const file = location.pathname.split("/").pop() || "index.html";
+  return file.replace(".html", "").replace("/", "");
+}
 
+function setActiveNav() {
+  document.querySelectorAll(".nav-link").forEach(a => {
+    a.classList.toggle("active", a.dataset.page === pageKey());
+  });
+}
+
+function makeGameCard(g) {
+  const badgeLabel = { hot: "Hot", new: "New", top: "Top" };
+  const badgeClass = { hot: "hot", new: "new", top: "top" };
   return `
-    <div class="game-card" onclick="openGame(${g.id})">
-      <div class="card-thumb" style="background:${g.bg}">
+    <div class="card" onclick="openGame(${g.id})" role="button" tabindex="0">
+      <div class="thumb" style="background:${g.bg}">
         <span>${g.emoji}</span>
-        ${g.badge ? `<span class="badge ${badgeMap[g.badge]}">${badgeLabel[g.badge]}</span>` : ""}
+        ${g.badge ? `<span class="badge ${badgeClass[g.badge]}">${badgeLabel[g.badge]}</span>` : ""}
       </div>
-      <div class="card-body">
-        <div class="card-name">${g.name}</div>
-        <div class="card-genre">${g.genre}</div>
+      <div class="body">
+        <h3>${g.name}</h3>
+        <p>${g.genre}</p>
       </div>
     </div>
   `;
 }
 
-function render() {
+function renderGames() {
+  const fg = document.getElementById("featuredGrid");
+  const ag = document.getElementById("allGrid");
+  if (!fg || !ag) return;
+
   const pool = GAMES.filter(g => {
     const matchCat = currentCategory === "all" || g.genre === currentCategory;
     const matchTag = currentTag === "all" || g.badge === currentTag;
@@ -53,79 +75,99 @@ function render() {
   const featured = pool.filter(g => g.featured);
   const rest = pool.filter(g => !g.featured);
 
-  const fg = document.getElementById("featuredGrid");
-  const ag = document.getElementById("allGrid");
-  const fs = fg.previousElementSibling;
-  const as = ag.previousElementSibling;
+  const featuredSection = fg.closest(".section");
+  const allSection = ag.closest(".section");
 
-  fs.style.display = featured.length ? "" : "none";
-  fg.innerHTML = featured.map(makeCard).join("");
+  if (featuredSection) featuredSection.style.display = featured.length ? "" : "none";
+  if (allSection) allSection.style.display = rest.length ? "" : "none";
 
-  as.style.display = rest.length ? "" : "none";
-  ag.innerHTML = rest.map(makeCard).join("");
+  fg.innerHTML = featured.map(makeGameCard).join("");
+  ag.innerHTML = rest.map(makeGameCard).join("");
 
-  document.getElementById("countAll").textContent = GAMES.length;
+  const count = document.getElementById("countAll");
+  if (count) count.textContent = GAMES.length;
 }
 
 function setCategory(cat, el) {
   currentCategory = cat;
-  document.querySelectorAll(".nav-item").forEach(n => n.classList.remove("active"));
+  document.querySelectorAll(".nav-link[data-group='games']").forEach(x => x.classList.remove("active"));
   if (el) el.classList.add("active");
-
-  const titles = {
-    all: "All Games",
-    action: "Action",
-    puzzle: "Puzzle",
-    sports: "Sports",
-    racing: "Racing",
-    casual: "Casual"
-  };
-
-  document.getElementById("pageTitle").textContent = titles[cat] || "Games";
-  render();
+  const titles = { all: "All Games", action: "Action", puzzle: "Puzzle", sports: "Sports", racing: "Racing", casual: "Casual" };
+  const title = document.getElementById("pageTitle");
+  if (title) title.textContent = titles[cat] || "Games";
+  renderGames();
 }
 
 function setTag(tag, el) {
   currentTag = tag;
   document.querySelectorAll(".tag").forEach(t => t.classList.remove("active"));
   if (el) el.classList.add("active");
-  render();
+  renderGames();
 }
 
 function setFilter(filter, el) {
-  currentTag = filter;
-  document.querySelectorAll(".tag").forEach(t => t.classList.remove("active"));
-  const tagButtons = document.querySelectorAll(".tag");
-  tagButtons.forEach(t => {
-    if (t.textContent.trim().toLowerCase() === filter) t.classList.add("active");
-  });
-  document.querySelectorAll(".nav-item").forEach(n => n.classList.remove("active"));
-  if (el) el.classList.add("active");
-  render();
+  setTag(filter, null);
+  if (el) {
+    document.querySelectorAll(".nav-link").forEach(n => n.classList.remove("active"));
+    el.classList.add("active");
+  }
 }
 
 function filterGames() {
-  searchQuery = document.getElementById("searchInput").value;
-  render();
+  const input = document.getElementById("searchInput");
+  searchQuery = input ? input.value : "";
+  renderGames();
 }
 
 function openGame(id) {
   const g = GAMES.find(x => x.id === id);
   if (!g) return;
-  document.getElementById("playerTitle").textContent = `Playing: ${g.name}`;
-  document.getElementById("gameFrame").src = g.url;
-  document.getElementById("player").classList.add("open");
+  const player = document.getElementById("player");
+  const frame = document.getElementById("gameFrame");
+  const title = document.getElementById("playerTitle");
+  if (!player || !frame || !title) return;
+  title.textContent = `Playing: ${g.name}`;
+  frame.src = g.url;
+  player.classList.add("open");
 }
 
 function closeGame() {
-  document.getElementById("player").classList.remove("open");
-  document.getElementById("gameFrame").src = "";
+  const player = document.getElementById("player");
+  const frame = document.getElementById("gameFrame");
+  if (player) player.classList.remove("open");
+  if (frame) frame.src = "";
 }
 
 function goFullscreen() {
   const frame = document.getElementById("gameFrame");
+  if (!frame) return;
   if (frame.requestFullscreen) frame.requestFullscreen();
   else if (frame.webkitRequestFullscreen) frame.webkitRequestFullscreen();
 }
 
-render();
+function sendChat() {
+  const input = document.getElementById("chatInput");
+  const list = document.getElementById("messages");
+  if (!input || !list || !input.value.trim()) return;
+
+  const el = document.createElement("div");
+  el.className = "message";
+  el.innerHTML = `<div class="meta">You • just now</div><div class="text">${input.value}</div>`;
+  list.appendChild(el);
+  input.value = "";
+  list.scrollTop = list.scrollHeight;
+}
+
+function init() {
+  setActiveNav();
+  renderGames();
+
+  const chatInput = document.getElementById("chatInput");
+  if (chatInput) {
+    chatInput.addEventListener("keydown", e => {
+      if (e.key === "Enter") sendChat();
+    });
+  }
+}
+
+document.addEventListener("DOMContentLoaded", init);
