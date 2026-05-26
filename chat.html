@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ArcadeVault - Chat</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <nav class="sidebar" aria-label="Site navigation">
+    <div class="brand">
+      <h1>Arcade<span>Vault</span></h1>
+      <p>Games • Apps • Chat</p>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="section-label">Games</div>
+      <a class="nav-link" data-page="index" href="index.html"><span class="icon">🏠</span> Dashboard</a>
+      <a class="nav-link" data-page="games" href="games.html"><span class="icon">🎮</span> All Games <span class="count">18</span></a>
+      <a class="nav-link" data-page="games" href="games.html?filter=featured"><span class="icon">⭐</span> Featured</a>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="section-label">Apps</div>
+      <a class="nav-link" data-page="apps" href="apps.html"><span class="icon">🧰</span> Apps Home</a>
+      <a class="nav-link" data-page="apps" href="apps.html#notes"><span class="icon">📝</span> Notes</a>
+      <a class="nav-link" data-page="apps" href="apps.html#calculator"><span class="icon">🧮</span> Calculator</a>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="section-label">Chat</div>
+      <a class="nav-link active" data-page="chat" href="chat.html"><span class="icon">💬</span> Chat Home</a>
+      <a class="nav-link" data-page="chat" href="chat.html#friends"><span class="icon">👥</span> Friends</a>
+      <a class="nav-link" data-page="chat" href="chat.html#messages"><span class="icon">📨</span> Messages</a>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="section-label">Settings</div>
+      <a class="nav-link" data-page="settings" href="settings.html"><span class="icon">⚙️</span> Settings</a>
+      <a class="nav-link" data-page="settings" href="settings.html#theme"><span class="icon">🎨</span> Theme</a>
+      <a class="nav-link" data-page="settings" href="settings.html#sound"><span class="icon">🔊</span> Sound</a>
+    </div>
+
+    <div class="sidebar-footer">ArcadeVault &copy; 2025</div>
+  </nav>
+
+  <main class="main">
+    <div class="topbar">
+      <div class="page-title">Chat</div>
+    </div>
+
+    <div class="content">
+      <div class="chat-box" id="messages">
+        <div class="messages" id="messagesList">
+          <div class="message">
+            <div class="meta">ArcadeVault Bot • now</div>
+            <div class="text">Welcome to chat. You can turn this into a real messaging area later.</div>
+          </div>
+          <div class="message">
+            <div class="meta">PlayerOne • 2 min ago</div>
+            <div class="text">What game should I play first?</div>
+          </div>
+        </div>
+
+        <div class="chat-compose">
+          <input id="chatInput" type="text" placeholder="Type a message..." />
+          <button class="btn" onclick="sendChat()">Send</button>
+        </div>
+      </div>
+
+      <div class="section" id="friends" style="margin-top:24px;">
+        <div class="section-head"><h2>Friends</h2></div>
+        <div class="pills">
+          <span class="pill">Nova</span>
+          <span class="pill">Kai</span>
+          <span class="pill">Milo</span>
+          <span class="pill">Sky</span>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
